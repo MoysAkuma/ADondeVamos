@@ -1,10 +1,8 @@
-# Microservices Template
+# Adondevamos
 
 ++ Note: This project is still WIP ++
 
-This repo contains a skeleton template for creating new microservices. 
-
-It is an opinionated template where certain technology/tool/framework have been chosen...
+Adondevamos is a website to create a list of places (itineraty) to share with a couple of friends and then they can vote of with place they want to go and share all data as a trip to help people to create their own itineray version of others 
 
 * [High Level Architecture](#high-level-architecture)
 * [Programming Language](#programming-language)
@@ -18,18 +16,104 @@ It is an opinionated template where certain technology/tool/framework have been 
     * [Docker](#docker)
     * [Kubernetes](#kubernetes)
 * [API Documentation](#api-documentation)
+* [Projects](#projects)
+* [Documentation of project](#projects)
+* [Artifacts](#artifacts)
+* [APIS](#apis)
+* [Documentation of project](#projects)
 
 ### <a name="high-level-architecture"></a>High Level Architecture
 
-![microservices-template](https://images-for-github-colinbut.s3.eu-west-2.amazonaws.com/microservices-template/microservices-template.png)
 
 ### <a name="programming-language"></a>Programming Language
 
-- Java 8
+- Java 17
 
 ### <a name="application-framework"></a>Application Framework
 
 - Spring Boot 2.0+
+### <a name="projects"></a>Projects
+This website is composed by some individual systems created by myself `@moysakuma` 
+
+`Adondevamos.io`
+
+DNS name of this project, public and production stage of this project
+
+`Adondevamos.io/dev`
+
+DNS name of this project to test, public and dev stage of this project
+
+`Adondevamosweb`
+
+HTML project, interfaces, interacts with users, html project, TBD
+
+`Adondevamosback`
+
+A rest full api which manage all APIS calls and microservice to run and manage `Adondevamos.io`
+
+`Adondevamosbd`
+
+A database connected to `Adondevamosback`, all necesary info about website is here.
+
+
+### <a name="apis"></a>APIS
+
+- /AkumaNo/Trip
+
+Api who manage info about trips
+
+`MSTrips.jar`
+
+A java springboot project to manage trips info
+
+`TripsBD`
+
+A bd project to manage trips info
+
+
+- /AkumaNo/Users
+
+Api who manage info about users
+
+`MSUsers.jar`
+
+A java springboot project to manage users info
+
+`UsersBD`
+
+A bd project to manage users info
+
+
+- /AkumaNo/Site
+
+Api who manage info about sites
+
+`MSSite.jar`
+
+A java springboot project to manage sites info
+
+`SiteBD`
+
+A bd project to manage sites info
+
+
+- /AkumaNo/Place
+
+Api who manage info about places
+
+`MSPlace.jar`
+
+A java springboot project to manage place info
+
+`PlaceBD`
+
+A bd project to manage place info
+
+
+### <a name="Endpoints"></a>Endpoints
+`/AkumaNo/Place`
+
+A bd project to manage place info
 
 ### <a name="build"></a>Build
 
@@ -107,3 +191,5 @@ Access Swagger on:
 http://{microservices-template-service-url}:{port}/swagger-ui.html
 ```
 
+
+`Version: Alpha`
