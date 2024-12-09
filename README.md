@@ -111,9 +111,750 @@ A bd project to manage place info
 
 
 ### <a name="Endpoints"></a>Endpoints
+/AkumaNo/Trip
+- '/CreateTrip'
+
+    `Method POST` to create trip in system
+
+    Request Body
+    ```
+    {
+        "Name" : "string"//string, name of the trip
+         ,"Description" : "string"//string, description of the trip
+         ,"Dates" : List<{"Atribute":"JsonObject"}>//list of dates, view `Dates`
+         "Name" : "string"//varchar(150), unique id of trip inside this system and akumasoft
+        ,"Description" : "string"//varchar(500), description about this trip
+        //array object list, all dates of trip´s info
+        ,"Dates" : [
+        //json object, info about date, see `DateObject`
+                    {
+                        "DateTypeName":"string"//varchar(150) id objet type of Dates see `DateObject.DateTypeName`
+                        //array object list, all captured date info 
+                        ,{ 
+                            "InitialDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                            ,"FinalDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                        } 
+        }]
+        //array object list, all itinerary of trip´s info
+        ,"Itinerary" : [
+        //json object, Place info 
+            {
+                "PlaceID":0//number, unique id of trip inside this system and akumasoft,
+                //array object list, all dates of place
+                ,"Dates" : [
+                //json object, info about date, see `DateObject`
+                            {
+                                "DateTypeName":"string"//varchar(150) id objet type of Dates see `DateObject.DateTypeName`
+                                //array object list, all captured date info 
+                                ,{ 
+                                    "InitialDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                                    ,"FinalDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                                } 
+                            }
+                ]
+                ,"PlaceDescription":"string"//varchar(150)
+                //json object, staticst info about votes and preferences and recomendations 
+                "Staticts": {
+                    "TypeID":0//number, unique id of place statics data inside this system and akumasoft
+                    ,"TypeIDName":"string"//varchar(150), unique id of place statics data inside this system and akumasoft
+                    ,"Value":0//number, value statics data inside this system and akumasoft
+                }
+            }
+        ],
+        //array object list, list of users
+        "MemberList":[
+            {
+                "UserID":0 //number, unique id of trip inside this system and akumasoft
+                ,"UserTag":"string" //
+                ,"Role":"string"
+            }
+        ]
+    }
+    ```
+    
+    Response Body `200`
+    ```
+    {
+        "StatusCode":200,
+        "BodyResponse":{
+            "Message":"Process of Creation success"
+            ,"Result":"New Trip Created"
+            ,"UniqueKey":0
+            ,"CompleteUrl":"string"
+        }
+    }
+    ```
+
+    Response Unexpected
+    
+    ```
+    {
+        "StatusCode":500,
+        "BodyResponse":{
+            "Message":"Internal Server Error"
+            ,"Result":"string"
+            ,"Track":[]
+        }
+    }
+    ```
+
+
+- '/ReadTrip'
+
+     `Method POST` to read all info about a trip
+
+    Request Body
+    
+    ```
+    {
+        
+    }
+    ```
+    
+    Response Body
+    
+    
+    ```
+    {
+       "TripID":""//number, unique id of trip inside this system and akumasoft
+       ,"Name" : "string"//varchar(150), unique id of trip inside this system and akumasoft
+        ,"Description" : "string"//string, description of the trip
+        ,"Dates" : List<{"Atribute":"JsonObject"}>//list of dates, view `Dates`
+        ,"Description" : "string"//varchar(500), description about this trip
+        //array object list, all dates of trip´s info
+        ,"Dates" : [
+        //json object, info about date, see `DateObject`
+            {
+                "DateTypeName":"string"//varchar(150) id objet type of Dates see `DateObject.DateTypeName`
+                //array object list, all captured date info 
+                ,{ 
+                    "InitialDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                    ,"FinalDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                } 
+            }
+        ]
+        //array object list, all itinerary of trip´s info
+        ,"Itinerary" : [
+        //json object, Place info 
+            {
+                "PlaceID":0//number, unique id of trip inside this system and akumasoft,
+                //array object list, all dates of place
+                ,"Dates" : [
+                //json object, info about date, see `DateObject`
+                            {
+                                "DateTypeName":"string"//varchar(150) id objet type of Dates see `DateObject.DateTypeName`
+                                //array object list, all captured date info 
+                                ,{ 
+                                    "InitialDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                                    ,"FinalDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                                } 
+                            }
+                ]
+                ,"PlaceDescription":"string"//varchar(150)
+                //json object, staticst info about votes and preferences and recomendations 
+                "Staticts": {
+                    "TypeID":0//number, unique id of place statics data inside this system and akumasoft
+                    ,"TypeIDName":"string"//varchar(150), unique id of place statics data inside this system and akumasoft
+                    ,"Value":0//number, value statics data inside this system and akumasoft
+                }
+            }
+        ],
+        //array object list, list of users
+        "MemberList":[
+            {
+                "UserID":0 //number, unique id of trip inside this system and akumasoft
+                ,"UserTag":"string" //
+                ,"Role":"string"
+            }
+        ]
+    }
+    ```
+- '/UpdateTrip'
+
+    `Method POST` to create trip
+
+    Request Body
+    ```
+    {
+        "TripID":""//number, unique id of trip inside this system and akumasoft
+       ,"Name" : "string"//varchar(150), unique id of trip inside this system and akumasoft
+        ,"Description" : "string"//string, description of the trip
+        ,"Dates" : List<{"Atribute":"JsonObject"}>//list of dates, view `Dates`
+        ,"Description" : "string"//varchar(500), description about this trip
+        //array object list, all dates of trip´s info
+        ,"Dates" : [
+        //json object, info about date, see `DateObject`
+            {
+                "DateTypeName":"string"//varchar(150) id objet type of Dates see `DateObject.DateTypeName`
+                //array object list, all captured date info 
+                ,{ 
+                    "InitialDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                    ,"FinalDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                } 
+            }
+        ]
+        //array object list, all itinerary of trip´s info
+        ,"Itinerary" : [
+        //json object, Place info 
+            {
+                "PlaceID":0//number, unique id of trip inside this system and akumasoft,
+                //array object list, all dates of place
+                ,"Dates" : [
+                //json object, info about date, see `DateObject`
+                            {
+                                "DateTypeName":"string"//varchar(150) id objet type of Dates see `DateObject.DateTypeName`
+                                //array object list, all captured date info 
+                                ,{ 
+                                    "InitialDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                                    ,"FinalDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                                } 
+                            }
+                ]
+                ,"PlaceDescription":"string"//varchar(150)
+                //json object, staticst info about votes and preferences and recomendations 
+                "Staticts": {
+                    "TypeID":0//number, unique id of place statics data inside this system and akumasoft
+                    ,"TypeIDName":"string"//varchar(150), unique id of place statics data inside this system and akumasoft
+                    ,"Value":0//number, value statics data inside this system and akumasoft
+                }
+            }
+        ],
+        //array object list, list of users
+        "MemberList":[
+            {
+                "UserID":0 //number, unique id of trip inside this system and akumasoft
+                ,"UserTag":"string" //
+                ,"Role":"string"
+            }
+        ]
+    }
+    ```
+    Response Body `200`
+    ```
+    {
+        "StatusCode":200,
+        "BodyResponse":{
+            "Message":"Process of Creation success"
+            ,"Result":"New Trip Created"
+            ,"UniqueKey":0
+            ,"CompleteUrl":"string"
+        }
+    }
+    ```
+
+- '/DeleteTrip'
+
+     `Method POST` to create trip
+
+    Request Body
+    ```
+    {
+        
+    }
+    ```
+    Response Body `200`
+    ```
+    {
+        "StatusCode":200,
+        "BodyResponse":{
+            "Message":"Process of Creation success"
+            ,"Result":"New Trip Created"
+            ,"UniqueKey":0
+            ,"CompleteUrl":"string"
+        }
+    }
+    ```
+- '/GetTrip/{`TripID`}'
+ `Method GET` to search all private information about a trip to show 
+
+    Request Body
+    ```
+
+    ```
+    Response Body
+    ```
+    {
+        "TripID" : 0,//long, unique id of trip inside this system and akumasoft
+        "Name" : "string"//varchar(150), unique id of trip inside this system and akumasoft
+        ,"Description" : "string"//varchar(500), description about this trip
+        //array object list, all dates of trip´s info
+        ,"Dates" : [
+        //json object, info about date, see `DateObject`
+                    {
+                        "DateTypeName":"string"//varchar(150) id objet type of Dates see `DateObject.DateTypeName`
+                        //array object list, all captured date info 
+                        ,{ 
+                            "InitialDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                            ,"FinalDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                        } 
+        }]
+        //array object list, all itinerary of trip´s info
+        ,"Itinerary" : [
+        //json object, Place info 
+            {
+                "PlaceID":0//number, unique id of trip inside this system and akumasoft,
+                //array object list, all dates of place
+                ,"Dates" : [
+                //json object, info about date, see `DateObject`
+                            {
+                                "DateTypeName":"string"//varchar(150) id objet type of Dates see `DateObject.DateTypeName`
+                                //array object list, all captured date info 
+                                ,{ 
+                                    "InitialDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                                    ,"FinalDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                                } 
+                            }
+                ]
+                ,"PlaceDescription":"string"//varchar(150)
+                //json object, staticst info about votes and preferences and recomendations 
+                "Staticts": {
+                    "TypeID":0//number, unique id of place statics data inside this system and akumasoft
+                    ,"TypeIDName":"string"//varchar(150), unique id of place statics data inside this system and akumasoft
+                    ,"Value":0//number, value statics data inside this system and akumasoft
+                }
+            }
+        ]
+        //array object list, all Comments of trip
+        ,"Comments" : [
+        //json object, comment info 
+            {
+                "CommentID":0//number, unique id of comment inside this system and akumasoft
+                ,"CommentObjectID":0//number
+                ,"CommentObjectTypeID":0//number
+                ,"CommentObjectSubTypeID":0//number
+                ,"CommentObjectSubTypeTypeID":0//number
+                ,"Parent":null//number, parent CommentID of comment see `CommentObject.Parent`
+                //array object list, all dates of place
+                ,"Content" : [
+                //json object, info about date, see `DateObject`
+                            {
+                                "Title":"string"//varchar(150) titule of comment see `CommentObject.Title`
+                                "Body":"string"//varchar(500) titule of comment see `CommentObject.Body`
+                                //array object list, all captured date info 
+                                ,{ 
+                                    "CreatedDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                                    ,"LastUpdateDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                                }
+                            }
+                ]
+                ,"PlaceDescription":"string"//varchar(150)
+                //json object, staticst info about votes and preferences and recomendations 
+                "Staticts": {
+                    "TypeID":0//number, unique id of place statics data inside this system and akumasoft
+                    ,"TypeIDName":"string"//varchar(150), unique id of place statics data inside this system and akumasoft
+                    ,"Value":0//number, value statics data inside this system and akumasoft
+                }
+            }
+        ]
+    }
+    ```
+
+- '/SearchTrip'
+ `Method POST` to create trip
+
+    Request Body
+    ```
+    {
+        "Filters" : {
+            "TripID":null, //number, Filter search by this value
+            ,"PlaceID":null, //number, Filter search by this value
+            ,"InitialDate":null, //string, Filter search by this value
+            ,"FinalDate":null, //string, Filter search by this value
+            ,"CountryID":null, //number, Filter search by this value
+        }
+    }
+    ```
+    Response Body
+    ```
+    {
+        [
+            {
+                "TripID" : 0,//long, unique id of trip inside this system and akumasoft
+                "Name" : "string"//varchar(150), unique id of trip inside this system and akumasoft
+                ,"Description" : "string"//varchar(500), description about this trip
+                //array object list, all dates of trip´s info
+                ,"Dates" : [
+                //json object, info about date, see `DateObject`
+                            {
+                                "DateTypeName":"string"//varchar(150) id objet type of Dates see `DateObject.DateTypeName`
+                                //array object list, all captured date info 
+                                ,{ 
+                                    "InitialDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                                    ,"FinalDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                                } 
+                }]
+                //array object list, all itinerary of trip´s info
+                ,"Itinerary" : [
+                //json object, Place info 
+                    {
+                        "PlaceID":0//number, unique id of trip inside this system and akumasoft,
+                        //array object list, all dates of place
+                        ,"Dates" : [
+                        //json object, info about date, see `DateObject`
+                                    {
+                                        "DateTypeName":"string"//varchar(150) id objet type of Dates see `DateObject.DateTypeName`
+                                        //array object list, all captured date info 
+                                        ,{ 
+                                            "InitialDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                                            ,"FinalDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                                        } 
+                                    }
+                        ]
+                        ,"PlaceDescription":"string"//varchar(150)
+                        //json object, staticst info about votes and preferences and recomendations 
+                        "Staticts": {
+                            "TypeID":0//number, unique id of place statics data inside this system and akumasoft
+                            ,"TypeIDName":"string"//varchar(150), unique id of place statics data inside this system and akumasoft
+                            ,"Value":0//number, value statics data inside this system and akumasoft
+                        }
+                    }
+                ]
+                //array object list, all Comments of trip
+                ,"Comments" : [
+                //json object, comment info 
+                    {
+                        "CommentID":0//number, unique id of comment inside this system and akumasoft
+                        ,"CommentObjectID":0//number
+                        ,"CommentObjectTypeID":0//number
+                        ,"CommentObjectSubTypeID":0//number
+                        ,"CommentObjectSubTypeTypeID":0//number
+                        ,"Parent":null//number, parent CommentID of comment see `CommentObject.Parent`
+                        //array object list, all dates of place
+                        ,"Content" : [
+                        //json object, info about date, see `DateObject`
+                                    {
+                                        "Title":"string"//varchar(150) titule of comment see `CommentObject.Title`
+                                        "Body":"string"//varchar(500) titule of comment see `CommentObject.Body`
+                                        //array object list, all captured date info 
+                                        ,{ 
+                                            "CreatedDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                                            ,"LastUpdateDate":"00:00:00 00:00:00" //Date in format DDMMYYYY
+                                        }
+                                    }
+                        ]
+                        ,"PlaceDescription":"string"//varchar(150)
+                        //json object, staticst info about votes and preferences and recomendations 
+                        "Staticts": {
+                            "TypeID":0//number, unique id of place statics data inside this system and akumasoft
+                            ,"TypeIDName":"string"//varchar(150), unique id of place statics data inside this system and akumasoft
+                            ,"Value":0//number, value statics data inside this system and akumasoft
+                        }
+                    }
+                ]
+        ]
+    }
+    }
+    ```
+
+`/AkumaNo/User`
+
+- '/CreateUser'
+ `Method POST` to create trip
+
+
+    Request Body
+    ```
+    {
+        ,"atribute" : "property"//type, desc
+    }
+    ```
+   Response Body `200`
+    ```
+    {
+        "StatusCode":200,
+        "BodyResponse":{
+            "Message":"Process of Creation success"
+            ,"Result":"New Trip Created"
+            ,"UniqueKey":0
+            ,"CompleteUrl":"string"
+        }
+    }
+    ```
+- '/ReadUser'
+ `Method POST` to create trip
+
+    Request Body
+    ```
+    {
+        ,"atribute" : "property"//type, desc
+    }
+    ```
+    Response Body `200`
+    ```
+    {
+        "StatusCode":200,
+        "BodyResponse":{
+            "Message":"Process of Creation success"
+            ,"Result":"New Trip Created"
+            ,"UniqueKey":0
+            ,"CompleteUrl":"string"
+        }
+    }
+    ```
+- '/UpdateUser'
+ `Method POST` to create trip
+
+
+    Request Body
+    ```
+    {
+        ,"atribute" : "property"//type, desc
+    }
+    ```
+    Response Body `200`
+    ```
+    {
+        "StatusCode":200,
+        "BodyResponse":{
+            "Message":"Process of Creation success"
+            ,"Result":"New Trip Created"
+            ,"UniqueKey":0
+            ,"CompleteUrl":"string"
+        }
+    }
+    ```
+- '/DeleteUser'
+ `Method POST` to create trip
+
+
+    Request Body
+    ```
+    {
+        ,"atribute" : "property"//type, desc
+    }
+    ```
+   Response Body `200`
+    ```
+    {
+        "StatusCode":200,
+        "BodyResponse":{
+            "Message":"Process of Creation success"
+            ,"Result":"New Trip Created"
+            ,"UniqueKey":0
+            ,"CompleteUrl":"string"
+        }
+    }
+    ```
+- '/SearchTrip'
+ `Method POST` to create trip
+
+
+    Request Body
+    ```
+    {
+        ,"atribute" : "property"//type, desc
+    }
+    ```
+    Response Body `200`
+    ```
+    {
+        "StatusCode":200,
+        "BodyResponse":{
+            "Message":"Process of Creation success"
+            ,"Result":"New Trip Created"
+            ,"UniqueKey":0
+            ,"CompleteUrl":"string"
+        }
+    }
+    ```
+
+`/AkumaNo/Site`
+
+- '/CreateSite'
+ `Method POST` to create trip
+
+
+    Request Body
+    ```
+    {
+        ,"atribute" : "property"//type, desc
+    }
+    ```
+   Response Body `200`
+    ```
+    {
+        "StatusCode":200,
+        "BodyResponse":{
+            "Message":"Process of Creation success"
+            ,"Result":"New Trip Created"
+            ,"UniqueKey":0
+            ,"CompleteUrl":"string"
+        }
+    }
+    ```
+- '/ReadSite'
+ `Method POST` to create trip
+
+
+    Request Body
+    ```
+    {
+        ,"atribute" : "property"//type, desc
+    }
+    ```
+   Response Body `200`
+    ```
+    {
+        "StatusCode":200,
+        "BodyResponse":{
+            "Message":"Process of Creation success"
+            ,"Result":"New Trip Created"
+            ,"UniqueKey":0
+            ,"CompleteUrl":"string"
+        }
+    }
+    ```
+- '/ReadSite'
+ `Method POST` to create trip
+
+    Request Body
+    ```
+    {
+        ,"atribute" : "property"//type, desc
+    }
+    ```
+   Response Body `200`
+    ```
+    {
+        "StatusCode":200,
+        "BodyResponse":{
+            "Message":"Process of Creation success"
+            ,"Result":"New Trip Created"
+            ,"UniqueKey":0
+            ,"CompleteUrl":"string"
+        }
+    }
+    ```
+- '/UpdateSite'
+ `Method POST` to create trip
+
+
+    Request Body
+    ```
+    {
+        ,"atribute" : "property"//type, desc
+    }
+    ```
+   Response Body `200`
+    ```
+    {
+        "StatusCode":200,
+        "BodyResponse":{
+            "Message":"Process of Creation success"
+            ,"Result":"New Trip Created"
+            ,"UniqueKey":0
+            ,"CompleteUrl":"string"
+        }
+    }
+    ```
+- '/DeleteSite'
+ `Method POST` to create trip
+
+    Request Body
+    ```
+    {
+
+    }
+    ```
+   Response Body `200`
+    ```
+    {
+        "StatusCode":200,
+        "BodyResponse":{
+            "Message":"Process of Creation success"
+            ,"Result":"New Trip Created"
+            ,"UniqueKey":0
+            ,"CompleteUrl":"string"
+        }
+    }
+    ```
+
 `/AkumaNo/Place`
 
-A bd project to manage place info
+- '/CreatePlace'
+ `Method POST` to create trip
+
+    Request Body
+    ```
+    {
+
+    }
+    ```
+    Response Body `200`
+    ```
+    {
+        "StatusCode":200,
+        "BodyResponse":{
+            "Message":"Process of Creation success"
+            ,"Result":"New Trip Created"
+            ,"UniqueKey":0
+            ,"CompleteUrl":"string"
+        }
+    }
+    ```
+- '/ReadPlace'
+ `Method POST` to create trip
+
+    Request Body
+    ```
+    {
+
+    }
+    ```
+    Response Body `200`
+    ```
+    {
+        "StatusCode":200,
+        "BodyResponse":{
+            "Message":"Process of Creation success"
+            ,"Result":"New Trip Created"
+            ,"UniqueKey":0
+            ,"CompleteUrl":"string"
+        }
+    }
+    ```
+- '/UpdatePlace'
+ `Method POST` to create trip
+
+    Request Body
+    ```
+    {
+
+    }
+    ```
+    Response Body `200`
+    ```
+    {
+        "StatusCode":200,
+        "BodyResponse":{
+            "Message":"Process of Creation success"
+            ,"Result":"New Trip Created"
+            ,"UniqueKey":0
+            ,"CompleteUrl":"string"
+        }
+    }
+    ```
+- '/DeletePlace'
+ `Method POST` to create trip
+
+    Request Body
+    ```
+    {
+
+    }
+    ```
+    Response Body `200`
+    ```
+    {
+        "StatusCode":200,
+        "BodyResponse":{
+            "Message":"Process of Creation success"
+            ,"Result":"New Trip Created"
+            ,"UniqueKey":0
+            ,"CompleteUrl":"string"
+        }
+    }
+    ```
 
 ### <a name="build"></a>Build
 
