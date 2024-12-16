@@ -11,6 +11,7 @@ Adondevamos is a website to create a list of places (itineraty) to share with a 
     * [ADondeVamos.io](#hosting)
     * [ADondeVamos.web](#web)
     * [ADondeVamos.back](#back)
+        * [Endpoints](#backends)
     * [AkumaNo](#akumano)
         * [Trips](#trips)
         * [Users](#users)
@@ -58,15 +59,97 @@ DNS name of this project, public and production stage of this project
 
 #### <a name="web"></a>Adondevamos.web
 
-HTML project, interfaces, interacts with users, html project, TBD
+HTML project, interfaces, interacts with users, html project.
+
+- Index.html
+- LogIn.html
+- CreateUser.html
+- UpdateUser.html
+- ViewUser.html
+- RecoverUser.html
+- ConfirmEmail.html
+- ConfirmPhone.html
+- CreateTrip.html
+- UpdateTrip.html
+- ViewTrip.html
+- CreatePlace.html
+- UpdatePlace.html
+- ViewPlace.html
+- ManageSite.html
+
 
 #### <a name="back"></a>Adondevamos.back
 
 A rest full api which manage all APIS calls and microservice to run and manage 
 
+##### <a name="backends"></a>Endpoints
+
+- CreateTrip
+- UpdateTrip
+- DeleteTrip
+- SearchTrip
+- GetTrip/{TripID}
+- GetGallery/{TripID}
+- Vote/Trip/{UserID}/{TripID}
+- GetItinerary/{TripID}
+- ChangePlaceOrder
+
+- AddMember/{TripID}/{UserID}
+- RemoveMember/{TripID}/{UserID}
+- ChangeMemberRole
+
+- CreatePlace
+- UpdatePlace
+- DeletePlace
+- SearchPlace
+- GetPlace/{PlaceID}
+- GetGallery/{PlaceID}
+
+- CreateComment
+- GetComments/{TripID}/{PagNumber}
+- GetComments/{PlaceID}/{PagNumber}
+- GetAnswersComments/{CommentID}
+- GetPublicComment/{UserID}/Trip/{TripID}
+- GetPublicComment/{UserID}/Place/{PlaceID}
+- DeleteComment
+- UpdateComment
+- ChangeVisibility/{CommentID}
+
+- Login
+- RecoverUser
+- ChangePassword
+- ConfirmEmail
+- ConfirmPhone
+
+- CreateUser
+- UpdateUser
+- DeleteUser
+- GetUser/{UserID}
+
+- CreateFacility
+- UpdateFacilities
+- DeleteFacility
+- ChangeOrderFacility
+
+
+
 #### <a name="bd"></a>Adondevamosbd
 
 A database connected to `Adondevamos.back`, all necesary info about website is here.
+- VotesPlaces
+    - VoteID : INT AUTO INCREMENT
+    - PlaceID: LONG
+    - UserID: LONG
+- Itineraries
+    - ItineraryID : INT AUTO INCREMENT
+    - PlaceID : INT
+    - Date : DATE
+    - OrderList : INT
+- Permisions
+    - UserID : INT
+    - PageID : INT
+    - Access : BOOLEAN
+    - RoleType : INT
 
 #### <a name="akumano"></a>AkumaNo
 An api gateway to access to several services
@@ -86,10 +169,23 @@ Complete Path:  'https://{HOST}/experience/trips/'
 - TripsBD
 
     A bd project to manage trips info
+    - Trips
+        - Trips
+            - ID : INT AUTO INCREMENT
+            - Name : VARCHAR
+            - Description : VARCHAR
+            - InitialDate : DATE
+            - FinalDate : DATE
+            - UbicationID : LONG
+            - International : BOOLEAN
 
 #### <a name="users"></a>Users
 
 Api who manage info about users
+
+Path: '/users/'
+
+Complete Path:  'https://{HOST}/exp/users/'
 
 - MSUsers.jar
     
@@ -98,11 +194,47 @@ Api who manage info about users
 - UsersBD
 
     A bd project to manage users info
-
+    - Users
+        - Users    
+            - UserID : INT AUTO INCREMENT
+            - Tag : VARCHAR
+            - Email : VARCHAR
+            - Phone : VARCHAR
+        
+    - Access
+        - Password
+            - ID : INT AUTO INCREMENT
+            - Password : VARCHAR
+            - UserID : LONG
+        - LogInHystory
+            - ID : INT AUTO INCREMENT
+            - UserID : LONG
+            - ResultCode : INT
+            - Date : DATESTAMP
+    - Profiles
+        - Profile
+            - ProfileID : INT AUTO INCREMENT
+            - FirstName : VARCHAR
+            - SecondName : VARCHAR
+            - LastName : VARCHAR
+            - SecondLastName : VARCHAR
+            - SiteID : LONG
+            - Active : BOOLEAN
+        
+        - SocialNetWork 
+            - ID : INT AUTO INCREMENT
+            - Name : VARCHAR
+            - Tag : VARCHAR
+            - ProfileID : LONG
+            - SiteID : LONG
 
 #### <a name="site"></a>Site
 
 Api who manage info about sites
+
+Path: '/sites/'
+
+Complete Path:  'https://{HOST}/exp/sites/'
 
 - MSSite.jar
 
@@ -111,11 +243,17 @@ Api who manage info about sites
 - SiteBD
 
     A bd project to manage sites info
+    - Sites
+    - ApyKeys
 
 
 #### <a name="place"></a>Place
 
 Api who manage info about places
+
+Path: '/place/'
+
+Complete Path:  'https://{HOST}/exp/place/'
 
 - MSPlace.jar
 
@@ -124,6 +262,12 @@ Api who manage info about places
 - PlaceBD
 
     A bd project to manage place info
+
+    - Places 
+        - PlaceID : INT AUTO INCREMENT
+        - Name : VARCHAR
+        - Description : VARCHAR
+        - UbicationID : LONG
 
 ### <a name="Entities"></a>Entities
 - Trip
@@ -741,6 +885,7 @@ MSPlaces.jar
         }
     }
     ```
+### <a name="documentation"></a>Documentation
 
 ### <a name="build"></a>Build
 
